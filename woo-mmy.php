@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name:       Woo-MMY
+ * Plugin Name:       WooMMY
  * Description:       Search products by Make, Model, and Year by using custom taxonomies to categorize them.
  * Version:           0.1.0
  * Author:            Andrew Smith
