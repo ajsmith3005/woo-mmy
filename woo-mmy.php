@@ -166,6 +166,8 @@ add_action( 'woocommerce_process_product_meta', 'save_field', 10, 2 );
  * Custom shortcode to add year, make, model search form
  */
 function make_model_year_shortcode() {
+	$model_options = get_model_options();
+	$year_options = get_year_options();
 	
 	return '
 		<form id="make-model-year-form" action="' . esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ) .  '" method="get">
