@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Apply filers submitted by the rps-mmy form on the shop page
+ * Apply filers submitted by the woommy form on the shop page
  */
  	
  function add_woommy_tax_query( $query ) {
