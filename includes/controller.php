@@ -1,5 +1,7 @@
 <?php
 
+namespace Woommy\Controller;
+
 // Add javascript
 function add_custom_scripts() {
 
@@ -18,7 +20,7 @@ function add_custom_scripts() {
 	wp_enqueue_script( 'woommy-main-js' );
 
 }
-add_action( 'wp_enqueue_scripts', 'add_custom_scripts' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\add_custom_scripts' );
 
 function add_custom_styles() {
 
@@ -32,4 +34,4 @@ function add_custom_styles() {
 	wp_enqueue_style( 'woommy-css' );
 
 }
-add_action( 'wp_enqueue_scripts', 'add_custom_styles' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\add_custom_styles' );
