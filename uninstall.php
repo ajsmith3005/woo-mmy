@@ -6,8 +6,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 function woommy_delete_plugin() {
 
-	function woommy_test_deactivate() {
-		// This function runs when the plugin is deactivated.
 		$terms = get_terms(
 			array(
 				'number' => '',
@@ -34,10 +32,6 @@ function woommy_delete_plugin() {
 		foreach ( $posts as $post ) {
 			delete_post_meta( $post->ID, $meta_key );
 		}
-	}
-	
-	// Register the deactivation hook, associating the 'my_plugin_deactivate' function with plugin deactivation.
-	register_deactivation_hook( __FILE__, 'woommy_test_deactivate' );
 
 	return true;
 }
