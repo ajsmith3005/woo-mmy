@@ -27,3 +27,35 @@ require_once( WOOMMY_PLUGIN_DIR . '/includes/shortcodes.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/rest-api.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/product-options.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/taxonomy-query.php' );
+
+function woommy_delete_plugin() {
+
+	$terms = get_terms(
+		array(
+			'number' => '',
+			'taxonomy' => 'woommy-car-details',
+			'post_status' => 'any',
+			'hide_empty' => false
+		)
+	);
+
+	foreach ( $terms as $term ) {
+		wp_delete_term( $term->term_id, 'woommy-car-details' );
+	}
+
+	$meta_key = "_make_model_year_information";
+
+	$posts = get_posts(
+		array(
+			'numberposts' => -1,
+			'post_type' => 'product',
+			'post_status' => 'any',
+		)
+		);
+
+	foreach ( $posts as $post ) {
+		delete_post_meta( $post->ID, $meta_key );
+	}
+}
+
+register_uninstall_hook( __FILE__, 'woommy_delete_plugin' );
