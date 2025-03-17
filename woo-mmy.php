@@ -30,29 +30,32 @@ require_once( WOOMMY_PLUGIN_DIR . '/includes/taxonomy-query.php' );
 
 function woommy_delete_plugin() {
 
-	$terms = get_terms(
-		array(
-			'number' => '',
-			'taxonomy' => 'woommy-car-details',
-			'post_status' => 'any',
-			'hide_empty' => false
-		)
-	);
+	global $wpdb;
 
-	foreach ( $terms as $term ) {
-		wp_delete_term( $term->term_id, 'woommy-car-details' );
+	$woommy_taxonomy = 'woommy-car-details';
+	
+	$term_taxonomy_ids = $wpdb->get_col( $wpdb->prepare( "SELECT term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE taxonomy = %s", $woommy_taxonomy ) );
+	if ( ! empty( $term_taxonomy_ids ) ) {
+		$term_ids = $wpdb->get_col( $wpdb->prepare( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE taxonomy = %s", $woommy_taxonomy ) );
+		$term_taxonomy_ids_list = implode( ',', array_map( 'intval', $term_taxonomy_ids ) );
+		$term_ids_list = implode( ',', array_map( 'intval', $term_ids ) );
+
+		$wpdb->query( "DELETE FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id IN ({$term_taxonomy_ids_list})" );
+		$wpdb->query( "DELETE FROM {$wpdb->terms} WHERE term_id IN ({$term_ids_list})" );
+		$wpdb->query( "DELETE FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN ({$term_taxonomy_ids_list})" );
 	}
 
-	$meta_key = "_make_model_year_information";
-
+	
 	$posts = get_posts(
 		array(
 			'numberposts' => -1,
 			'post_type' => 'product',
 			'post_status' => 'any',
-		)
+			)
 		);
-
+	
+	$meta_key = "_make_model_year_information";
+	
 	foreach ( $posts as $post ) {
 		delete_post_meta( $post->ID, $meta_key );
 	}
