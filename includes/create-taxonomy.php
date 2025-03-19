@@ -1,5 +1,7 @@
 <?php
 
+namespace Woommy\CreateTaxonomies;
+
 /**
  *Adds custom taxonomies
  */
@@ -28,4 +30,4 @@ function woommy_create_taxonomies() {
 	register_taxonomy( 'woommy-car-details', 'product', $args);
 }
 
-add_action( 'init', 'woommy_create_taxonomies');
+add_action( 'init', __NAMESPACE__ . '\woommy_create_taxonomies');

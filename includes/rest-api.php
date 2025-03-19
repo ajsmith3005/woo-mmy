@@ -1,5 +1,9 @@
 <?php
 
+namespace Woommy\RestApi;
+
+use WP_REST_Request;
+
 function get_models( $selected_make ) {
 	$terms = get_terms( array( 
 		'taxonomy' => 'woommy-car-details',
@@ -68,15 +72,17 @@ function custom_year_endpoint( WP_REST_Request $request ) {
 	return rest_ensure_response( $years );
 }
 
-add_action( 'rest_api_init', function () {
+function register_rest_routes() {
 	register_rest_route( 'woommy/v1', '/models/', array(
 		'methods' => 'GET',
-		'callback' => 'custom_model_endpoint',
+		'callback' => 'Woommy\RestApi\custom_model_endpoint',
 		'permission_callback' => '__return_true',
 	) );
 	register_rest_route( 'woommy/v1', '/years/', array(
 	  'methods' => 'GET',
-	  'callback' => 'custom_year_endpoint',
+	  'callback' => 'Woommy\RestApi\custom_year_endpoint',
 	  'permission_callback' => '__return_true',
 	) );
-} );
+}
+
+add_action( 'rest_api_init', __NAMESPACE__ . '\register_rest_routes' );
