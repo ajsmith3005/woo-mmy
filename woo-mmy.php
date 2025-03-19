@@ -21,12 +21,22 @@ define( 'WOOMMY_PLUGIN' , __FILE__ );
 define( 'WOOMMY_PLUGIN_DIR', untrailingslashit( dirname( WOOMMY_PLUGIN) ) );
 
 require_once( WOOMMY_PLUGIN_DIR . '/includes/controller.php' );
-require_once( WOOMMY_PLUGIN_DIR . '/includes/functions.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/create-taxonomy.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/shortcodes.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/rest-api.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/product-options.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/taxonomy-query.php' );
+
+function woommy_plugin_url( $path = '' ) {
+	$url = plugins_url( $path, WOOMMY_PLUGIN );
+
+	if ( is_ssl()
+	and 'http:' == substr( $url, 0, 5 ) ) {
+		$url = 'https:' . substr( $url, 5 );
+	}
+
+	return $url;
+}
 
 function woommy_delete_plugin() {
 
