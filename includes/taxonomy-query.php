@@ -1,5 +1,7 @@
 <?php
 
+namespace Woommy\TaxonomyQuery;
+
 /**
  * Apply filers submitted by the woommy form on the shop page
  */
@@ -17,4 +19,4 @@
 	}
 }
 
-add_action( 'woocommerce_product_query', 'add_woommy_tax_query' );
+add_action( 'woocommerce_product_query', __NAMESPACE__ . '\add_woommy_tax_query' );
