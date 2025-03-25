@@ -1,5 +1,7 @@
 <?php
 
+namespace Woommy\Shortcodes;
+
 /**
  * Custom shortcode to add year, make, model search form
  */
@@ -27,7 +29,7 @@ function make_model_year_shortcode() {
 	';
 }
 
-add_shortcode('make-model-year-form', 'make_model_year_shortcode');
+add_shortcode('make-model-year-form', __NAMESPACE__ . '\make_model_year_shortcode');
 
 function get_make_options() {
 	$terms = get_terms( array( 

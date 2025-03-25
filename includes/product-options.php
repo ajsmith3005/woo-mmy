@@ -1,5 +1,7 @@
 <?php
 
+namespace Woommy\ProductOptions;
+
 /**
  * Add a custom field to the product edit page to input the make, model, and year.
  */
@@ -23,7 +25,7 @@ function add_field() {
 	<?php
 }
 
-add_action( 'woocommerce_product_options_general_product_data', 'add_field' );
+add_action( 'woocommerce_product_options_general_product_data', __NAMESPACE__ . '\add_field' );
 
 /**
  * Save the year, make, and model information for a product.
@@ -111,4 +113,4 @@ function save_field( $post_id, $post ) {
 	$product->save_meta_data();
 }
 
-add_action( 'woocommerce_process_product_meta', 'save_field', 10, 2 );
+add_action( 'woocommerce_process_product_meta', __NAMESPACE__ . '\save_field', 10, 2 );
