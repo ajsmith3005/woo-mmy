@@ -45,8 +45,8 @@ function save_field( $post_id, $post ) {
 
 		$car_array = explode( ',', $car );
 		
-		$make  = array_key_exists( 0, $car_array ) ? trim( $car_array[0] ) : '';
-		$model = array_key_exists( 1, $car_array ) ? trim( $car_array[1] ) : '';
+		$make  = array_key_exists( 0, $car_array ) ? ucwords(trim( $car_array[0] )) : '';
+		$model = array_key_exists( 1, $car_array ) ? ucwords(trim( $car_array[1] )) : '';
 		$years = array_key_exists( 2, $car_array ) ? trim( $car_array[2] ) : '';
 
 		if ( '' === $make ) {

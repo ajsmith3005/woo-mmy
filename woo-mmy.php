@@ -2,7 +2,7 @@
 /*
  * Plugin Name:       WooMMY
  * Description:       Search products by Make, Model, and Year by using custom taxonomies to categorize them.
- * Version:           0.2.0
+ * Version:           0.3.0
  * Author:            Andrew Smith
  * Author URI:        https://andycodes.net/
  * License:           GPL v3 or later
@@ -14,7 +14,7 @@
 	exit; // Exit if accessed directly
 }
 
-define( 'WOOMMY_VERSION', '0.2.0' );
+define( 'WOOMMY_VERSION', '0.3.0' );
 
 define( 'WOOMMY_PLUGIN' , __FILE__ );
 
