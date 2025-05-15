@@ -79,7 +79,7 @@ function get_model_options() {
 
 		$model_options['disabled'] = '';
 
-		$models = get_models( $_GET['make'] );
+		$models = \Woommy\RestApi\get_models( $_GET['make'] );
 
 		foreach( $models as $model ) {
 
@@ -108,7 +108,7 @@ function get_year_options() {
 
 		$year_options['disabled'] = '';
 
-		$years = get_years( $_GET['model'] );
+		$years = \Woommy\RestApi\get_years( $_GET['model'] );
 
 		foreach( $years as $year ) {
 
