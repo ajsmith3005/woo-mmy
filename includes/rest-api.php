@@ -4,12 +4,20 @@ namespace Woommy\RestApi;
 
 use WP_REST_Request;
 
+/**
+ * Get Models
+ * 
+ * Iterates over the custom taxonomy terms and returns an array of models
+ * based on the input parent make.
+ * 
+ * @param str $selected_make 
+ * @return array Array of terms
+ */
 function get_models( $selected_make ) {
 	$terms = get_terms( array( 
 		'taxonomy' => 'woommy-car-details',
 	) );
 
-	//iterate over the custom taxonomy terms array and build an array of model names that have parents of the specified make
 	$models = array();
 	$make_term = get_term_by( 'slug', sanitize_title($selected_make), 'woommy-car-details' );
 	$make_id = $make_term->term_id;
@@ -59,6 +67,11 @@ function get_years( $selected_model ) {
 function custom_model_endpoint( WP_REST_Request $request ) {
 	$selected_make = $request->get_param( 'selected_make' );
 
+	if( ! is_string( $selected_make ) ) {
+		error_log( sprintf( 'Error: Variable $selected_make in %s must be a string, but received %s.', __FUNCTION__, gettype( $selected_make)));
+		return;
+	}
+
 	$models = get_models( $selected_make );
 
 	return rest_ensure_response( $models );
@@ -67,6 +80,11 @@ function custom_model_endpoint( WP_REST_Request $request ) {
 //Custom enpoint to grab years from the custom taxonomy based on selected model
 function custom_year_endpoint( WP_REST_Request $request ) {
 	$selected_model = $request->get_param('selected_model');
+
+	if( ! is_string( $selected_model ) ) {
+		error_log( sprintf( 'Error: Variable $selected_model in %s must be a string, but received %s.', __FUNCTION__, gettype( $selected_model)));
+		return;
+	}
 
 	$years = get_years( $selected_model );
 	return rest_ensure_response( $years );
