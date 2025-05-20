@@ -39,9 +39,8 @@ add_action( 'woocommerce_product_options_general_product_data', __NAMESPACE__ . 
  * Saves the year, make, and model information for a product.
  * 
  * @param int $post_id
- * @param WP_Post $post
  */
-function save_field( $post_id, $post ): void {
+function save_field( int $post_id ): void {
 	if ( ! isset( $_POST['_make_model_year_information'] ) ) {
 		return;
 	}
