@@ -1,11 +1,17 @@
 <?php
+/**
+ * Product Options
+ */
 
 namespace Woommy\ProductOptions;
 
 /**
- * Add a custom field to the product edit page to input the make, model, and year.
+ * Add Field
+ * 
+ * Adds a custom text area field to the product edit page for inputting 
+ * the make, model, and year.
  */
-function add_field() {
+function add_field(): void {
 	global $product_object;
 	?>
 	<div class="options_group show_if_simple show_if_variable">
@@ -28,17 +34,20 @@ function add_field() {
 add_action( 'woocommerce_product_options_general_product_data', __NAMESPACE__ . '\add_field' );
 
 /**
- * Save the year, make, and model information for a product.
+ * Save Field
+ * 
+ * Saves the year, make, and model information for a product.
+ * 
+ * @param int $post_id
+ * @param WP_Post $post
  */
-function save_field( $post_id, $post ) {
+function save_field( $post_id, $post ): void {
 	if ( ! isset( $_POST['_make_model_year_information'] ) ) {
 		return;
 	}
 
 	$car_input = $_POST['_make_model_year_information'];
-
 	$car_list = preg_split( '/\r\n|\r|\n/', $car_input );
-
 	$term_id_array = array();
 
 	foreach( $car_list as $car ) {
@@ -53,9 +62,7 @@ function save_field( $post_id, $post ) {
 			continue;
 		}
 
-		/**
-		 * Make Term
-		 */
+		// Add make term
 		$make_term = get_term_by( 'slug', sanitize_title( $make ), 'woommy-car-details' );
 		
 		if ( ! $make_term ) {
@@ -65,9 +72,7 @@ function save_field( $post_id, $post ) {
 
 		array_push( $term_id_array, $make_term->term_id );
 
-		/**
-		 * Model Term
-		 */
+		// Add model term
 		$model_term = get_term_by( 'slug', sanitize_title( $model ), 'woommy-car-details' );
 		
 		if ( '' !== $model && ! $model_term ) {
@@ -77,9 +82,7 @@ function save_field( $post_id, $post ) {
 
 		array_push( $term_id_array, $model_term->term_id );
 
-		/**
-		 * Year Term
-		 */
+		// Add year term
 		$years_array = explode( '-', $years );
 
 		if ( count( $years_array ) > 1 ) {

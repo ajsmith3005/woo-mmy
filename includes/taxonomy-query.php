@@ -1,14 +1,19 @@
 <?php
+/**
+ * Taxonomy Query
+ */
 
 namespace Woommy\TaxonomyQuery;
 
 /**
- * Apply filers submitted by the woommy form on the shop page
+ * WooMMY Taxonomy Query
+ * 
+ * Alters the WooCommerce product query to filter the displayed products
+ * by the selected make, model, and year.
  */
  	
- function add_woommy_tax_query( $query ) {
+ function add_woommy_tax_query( $query ): void {
 	if ( is_shop() && isset( $_GET['make'] ) && isset( $_GET['model'] ) && isset( $_GET['car-year']) ) {
-		//modify the query parameters
 		$query->set( 'tax_query', array(
 			array(
 				'taxonomy' => 'woommy-car-details',

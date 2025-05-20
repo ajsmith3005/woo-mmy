@@ -1,9 +1,16 @@
 <?php
+/**
+ * Shortcodes
+ */
 
 namespace Woommy\Shortcodes;
 
 /**
- * Custom shortcode to add year, make, model search form
+ * MMY Form Shortcode
+ * 
+ * Custom shortcode to add year, make, model search form.
+ * 
+ * @return string HTML for the MMY form
  */
 function make_model_year_shortcode() {
 	$model_options = get_model_options();
@@ -31,14 +38,23 @@ function make_model_year_shortcode() {
 
 add_shortcode('make-model-year-form', __NAMESPACE__ . '\make_model_year_shortcode');
 
+/**
+ * Get Make Options
+ * 
+ * Prepares the "make" options elements for use within a select element.
+ * 
+ * @return string A concatenated string of options elements
+ */
 function get_make_options() {
 	$terms = get_terms( array( 
 		'taxonomy' => 'woommy-car-details',
 	) );
 
-	//iterate over the custom taxonomy terms array and build an array of make names that have child models with the specified year
 	$makes = array();
 	$make_options = '';
+
+	// Iterate over the custom taxonomy terms array and build an array of
+	// make names that have child models with the specified year
 	foreach ( $terms as $term ) {
 		if ( 0 === $term->parent ) {
 			$make = array(
@@ -53,7 +69,6 @@ function get_make_options() {
 	}
 
 	foreach( $makes as $make ) {
-
 		$make_is_selected = '';
 		 
 		if( is_shop() && isset( $_GET['make'] ) && $make["slug"] === $_GET['make'] ) {
@@ -66,23 +81,25 @@ function get_make_options() {
 	return $make_options;
  }
 
-
-
+/**
+ * Get Model Options
+ * 
+ * Prepares the "model" options elements for use within a select element.
+ * 
+ * @return string A concatenated string of options elements
+ */
 function get_model_options() {
-	
 	$model_options = array(
 		'disabled' => 'disabled',
 		'options' => ''
 	);
 	
 	if( is_shop() && isset( $_GET['make'] ) && isset( $_GET['model'] ) && isset( $_GET['car-year']) ) {
-
 		$model_options['disabled'] = '';
 
 		$models = \Woommy\RestApi\get_models( $_GET['make'] );
 
 		foreach( $models as $model ) {
-
 			$model_is_selected = '';
 
 			if( $model["slug"] === $_GET['model'] ) {
@@ -96,22 +113,25 @@ function get_model_options() {
 	return $model_options;
 }
 
-
+/**
+ * Get Year Options
+ * 
+ * Prepares the "year" options elements for use within a select element.
+ * 
+ * @return string A concatenated string of options elements
+ */
 function get_year_options() {
-	
 	$year_options = array(
 		'disabled' => 'disabled',
 		'options' => ''
 	);
 	
 	if( is_shop() && isset( $_GET['make'] ) && isset( $_GET['model'] ) && isset( $_GET['car-year']) ) {
-
 		$year_options['disabled'] = '';
 
 		$years = \Woommy\RestApi\get_years( $_GET['model'] );
 
 		foreach( $years as $year ) {
-
 			$year_is_selected = '';
 
 			if( $year["slug"] === $_GET['car-year'] ) {

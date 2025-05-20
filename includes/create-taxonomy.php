@@ -1,11 +1,17 @@
 <?php
+/**
+ * Create Taxonomy
+ */
 
-namespace Woommy\CreateTaxonomies;
+namespace Woommy\CreateTaxonomy;
 
 /**
- *Adds custom taxonomies
+ * Create Taxonomy
+ * 
+ * Registers a custom hierarchical taxonomy for categorizing 
+ * products by make model and year.
  */
-function woommy_create_taxonomies() {
+function woommy_create_taxonomy(): void {
 	$labels = array(
 		'name'              =>_X('Makes and Models', 'taxonomy general name', 'textdomain'),
 		'singular_name'     => _X('Make and Model', 'taxonomy singular name', 'textdomain'),
@@ -30,4 +36,4 @@ function woommy_create_taxonomies() {
 	register_taxonomy( 'woommy-car-details', 'product', $args);
 }
 
-add_action( 'init', __NAMESPACE__ . '\woommy_create_taxonomies');
+add_action( 'init', __NAMESPACE__ . '\woommy_create_taxonomy');

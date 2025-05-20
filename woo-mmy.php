@@ -38,13 +38,20 @@ function woommy_plugin_url( $path = '' ) {
 	return $url;
 }
 
-function woommy_delete_plugin() {
+/**
+ * Delete Plugin
+ * 
+ * Deletes terms and term relationships from the woommy-car-details taxonomy
+ * when the plugin is deleted.
+ */
+function woommy_delete_plugin(): void {
 
 	global $wpdb;
 
 	$woommy_taxonomy = 'woommy-car-details';
 	
 	$term_taxonomy_ids = $wpdb->get_col( $wpdb->prepare( "SELECT term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE taxonomy = %s", $woommy_taxonomy ) );
+	
 	if ( ! empty( $term_taxonomy_ids ) ) {
 		$term_ids = $wpdb->get_col( $wpdb->prepare( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE taxonomy = %s", $woommy_taxonomy ) );
 		$term_taxonomy_ids_list = implode( ',', array_map( 'intval', $term_taxonomy_ids ) );
@@ -54,7 +61,6 @@ function woommy_delete_plugin() {
 		$wpdb->query( "DELETE FROM {$wpdb->terms} WHERE term_id IN ({$term_ids_list})" );
 		$wpdb->query( "DELETE FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN ({$term_taxonomy_ids_list})" );
 	}
-
 	
 	$posts = get_posts(
 		array(
