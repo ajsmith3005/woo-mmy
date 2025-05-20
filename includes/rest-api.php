@@ -5,8 +5,9 @@
 
 namespace Woommy\RestApi;
 
-use WP_Error;
 use WP_REST_Request;
+use WP_REST_Response;
+use WP_Error;
 
 /**
  * Get Models
@@ -17,7 +18,7 @@ use WP_REST_Request;
  * @param string $selected_make 
  * @return array Array of arrays containing term slugs and names
  */
-function get_models( $selected_make ) {
+function get_models( string $selected_make ): array {
 	$terms = get_terms( array( 
 		'taxonomy' => 'woommy-car-details',
 	) );
@@ -51,7 +52,7 @@ function get_models( $selected_make ) {
  * @param string $selected_model
  * @return array Array of arrays containing term slugs and names
  */
-function get_years( $selected_model ) {
+function get_years( string $selected_model ): array {
 	$terms = get_terms( array( 
 		'taxonomy' => 'woommy-car-details',
 	) );
@@ -82,14 +83,18 @@ function get_years( $selected_model ) {
  * Custom enpoint to grab models from the custom WooMMY taxonomy based on selected make.
  * 
  * @param WP_REST_Request $request
- * @return WP_REST_Response 
+ * @return WP_REST_Response|WP_Error
  */
-function custom_model_endpoint( WP_REST_Request $request ) {
+function custom_model_endpoint( WP_REST_Request $request ): WP_REST_Response|WP_Error {
 	$selected_make = $request->get_param( 'selected_make' );
 
 	if( ! is_string( $selected_make ) ) {
-		error_log( sprintf( 'Error: Variable $selected_make in %s must be a string, but received %s.', __FUNCTION__, gettype( $selected_make)));
-		return;
+		$error = sprintf( 'Error: Variable $selected_make in %s must be a string, but received %s.', __FUNCTION__, gettype( $selected_make));
+		error_log( $error );
+		return new WP_Error(
+			'woo-mmy',
+			$error
+		);
 	}
 
 	$models = get_models( $selected_make );

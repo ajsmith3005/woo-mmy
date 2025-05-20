@@ -27,7 +27,15 @@ require_once( WOOMMY_PLUGIN_DIR . '/includes/rest-api.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/product-options.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/taxonomy-query.php' );
 
-function woommy_plugin_url( $path = '' ) {
+/**
+ * WooMMY URL
+ * 
+ * Generates a URL for the WooMMY plugin.
+ * 
+ * @param string $path
+ * @return string The WooMMY URL
+ */
+function woommy_plugin_url( string $path = '' ): string {
 	$url = plugins_url( $path, WOOMMY_PLUGIN );
 
 	if ( is_ssl()

@@ -12,7 +12,7 @@ namespace Woommy\Shortcodes;
  * 
  * @return string HTML for the MMY form
  */
-function make_model_year_shortcode() {
+function make_model_year_shortcode(): string {
 	$model_options = get_model_options();
 	$year_options = get_year_options();
 	
@@ -45,7 +45,7 @@ add_shortcode('make-model-year-form', __NAMESPACE__ . '\make_model_year_shortcod
  * 
  * @return string A concatenated string of options elements
  */
-function get_make_options() {
+function get_make_options(): string {
 	$terms = get_terms( array( 
 		'taxonomy' => 'woommy-car-details',
 	) );
@@ -86,9 +86,9 @@ function get_make_options() {
  * 
  * Prepares the "model" options elements for use within a select element.
  * 
- * @return string A concatenated string of options elements
+ * @return array Associative array of model options
  */
-function get_model_options() {
+function get_model_options(): array {
 	$model_options = array(
 		'disabled' => 'disabled',
 		'options' => ''
@@ -118,9 +118,9 @@ function get_model_options() {
  * 
  * Prepares the "year" options elements for use within a select element.
  * 
- * @return string A concatenated string of options elements
+ * @return array Associative array of year options
  */
-function get_year_options() {
+function get_year_options(): array {
 	$year_options = array(
 		'disabled' => 'disabled',
 		'options' => ''
