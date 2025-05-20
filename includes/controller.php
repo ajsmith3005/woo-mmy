@@ -6,7 +6,7 @@
 namespace Woommy\Controller;
 
 /**
- * Adds custom JavaScript.
+ * Add Custom JavaScript
  * 
  * The main woommy JavaScript file is registered with defer and enqueued.
  */
@@ -28,7 +28,7 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\add_custom_scripts' );
 
 
 /**
- * Adds custom styles.
+ * Adds Custom Styles
  * 
  * The main woommy stylesheed is registered and enqueued.
  */
