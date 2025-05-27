@@ -26,6 +26,7 @@ require_once( WOOMMY_PLUGIN_DIR . '/includes/shortcodes.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/rest-api.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/product-options.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/taxonomy-query.php' );
+require_once( WOOMMY_PLUGIN_DIR . '/blocks/mmy-form/mmy-form.php' );
 
 /**
  * WooMMY URL
