@@ -7,9 +7,9 @@ return array(
 		'name' => 'create-block/mmy-form',
 		'version' => '0.1.0',
 		'title' => 'Mmy Form',
-		'category' => 'WooMMY',
+		'category' => 'woommy',
 		'icon' => 'forms',
-		'description' => 'Example block scaffolded with Create Block tool.',
+		'description' => 'Make Model Year form.',
 		'example' => array(
 			
 		),

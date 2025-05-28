@@ -87,3 +87,14 @@ function woommy_delete_plugin(): void {
 }
 
 register_uninstall_hook( __FILE__, 'woommy_delete_plugin' );
+
+function woommy_block_category($block_categories, $block_editor_context) {
+	array_push( $block_categories, array( 
+		'slug' => 'woommy',
+		'title' => 'WooMMY' 
+	) );
+
+	return $block_categories;
+}
+
+add_filter( 'block_categories_all', 'woommy_block_category', 10, 2 );
