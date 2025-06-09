@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "woommy/mmy-form",
+  "version": "0.1.0",
+  "title": "Mmy Form",
+  "category": "woommy",
+  "icon": "forms",
+  "description": "Make Model Year form.",
+  "keywords": [
+    "form",
+    "make",
+    "model",
+    "year",
+    "search",
+    "woommy"
+  ],
+  "example": {},
+  "attributes": {
+    "submitText": {
+      "type": "string",
+      "default": "Search"
+    }
+  },
+  "supports": {
+    "html": false,
+    "color": {
+      "background": true
+    }
+  },
+  "textdomain": "mmy-form",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

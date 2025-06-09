@@ -26,6 +26,7 @@ require_once( WOOMMY_PLUGIN_DIR . '/includes/shortcodes.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/rest-api.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/product-options.php' );
 require_once( WOOMMY_PLUGIN_DIR . '/includes/taxonomy-query.php' );
+require_once( WOOMMY_PLUGIN_DIR . '/blocks/mmy-form/mmy-form.php' );
 
 /**
  * WooMMY URL
@@ -86,3 +87,14 @@ function woommy_delete_plugin(): void {
 }
 
 register_uninstall_hook( __FILE__, 'woommy_delete_plugin' );
+
+function woommy_block_category($block_categories, $block_editor_context) {
+	array_push( $block_categories, array( 
+		'slug' => 'woommy',
+		'title' => 'WooMMY' 
+	) );
+
+	return $block_categories;
+}
+
+add_filter( 'block_categories_all', 'woommy_block_category', 10, 2 );
