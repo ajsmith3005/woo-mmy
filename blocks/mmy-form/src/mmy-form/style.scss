@@ -5,6 +5,61 @@
  * Replace them with your own styles or remove the file completely.
  */
 
+form.wp-block-woommy-mmy-form {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+		-ms-flex-pack: center;
+			justify-content: center;
+	width: 100%;
+	gap: 1em;
+}
+  
+form.wp-block-woommy-mmy-form div.container {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+	-webkit-flex-basis: 80%;
+		-ms-flex-preferred-size: 80%;
+			flex-basis: 80%;
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+		-ms-flex-positive: 1;
+			flex-grow: 1;
+	gap: 1em;
+	padding: 0 1em;
+}
+
+form.wp-block-woommy-mmy-form div.container select {
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+		-ms-flex-positive: 1;
+			flex-grow: 1;
+	-webkit-flex-basis: 12em;
+		-ms-flex-preferred-size: 12em;
+			flex-basis: 12em;
+	margin-bottom: 0;
+	padding: 0.25em;
+}
+
+form.wp-block-woommy-mmy-form div.container br {
+	display: none;
+}
+
+form.wp-block-woommy-mmy-form .wp-block-buttons {
+	gap: unset;
+}
+ 
 .wp-block-create-block-mmy-form {
 	background-color: #21759b;
 	color: #fff;
